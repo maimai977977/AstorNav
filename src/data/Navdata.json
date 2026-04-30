@@ -1,0 +1,682 @@
+[
+  {
+    "id": 1,
+    "category": "技术论坛",
+    "title": "吾爱破解",
+    "description": "安全技术交流与资源共享",
+    "tags": ["安全技术", "逆向工程", "资源共享"],
+    "status": "online",
+    "url": "https://www.52pojie.cn",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=52PoJie"
+  },
+  {
+    "id": 2,
+    "category": "技术论坛",
+    "title": "恩山无线论坛",
+    "description": "网络设备、路由器、无线技术讨论",
+    "tags": ["网络设备", "路由器", "无线技术"],
+    "status": "online",
+    "url": "https://www.right.com.cn/forum",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Right.com.cn"
+  },
+  {
+    "id": 3,
+    "category": "技术论坛",
+    "title": "飘云阁",
+    "description": "软件逆向、加密解密技术社区",
+    "tags": ["软件逆向", "加密解密", "技术社区"],
+    "status": "online",
+    "url": "https://www.chinapyg.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Chinapyg"
+  },
+  {
+    "id": 4,
+    "category": "技术论坛",
+    "title": "技术邻",
+    "description": "工程技术交流平台",
+    "tags": ["工程技术", "交流平台"],
+    "status": "online",
+    "url": "https://www.jishulink.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Jishulink"
+  },
+  {
+    "id": 5,
+    "category": "技术论坛",
+    "title": "工控课堂",
+    "description": "工业自动化、PLC、嵌入式技术",
+    "tags": ["工业自动化", "PLC", "嵌入式"],
+    "status": "online",
+    "url": "https://www.gkket.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Gkket"
+  },
+  {
+    "id": 6,
+    "category": "技术论坛",
+    "title": "网上读书园地",
+    "description": "电子书分享与读书交流社区",
+    "tags": ["电子书", "读书交流", "资源分享"],
+    "status": "online",
+    "url": "https://www.readfree.net",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Readfree"
+  },
+  {
+    "id": 7,
+    "category": "分享社区",
+    "title": "网盘分享",
+    "description": "网盘资源、学习资料集合",
+    "tags": ["网盘资源", "学习资料", "分享"],
+    "status": "online",
+    "url": "http://wpfx.org.cn/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=PanShare"
+  },
+  {
+    "id": 8,
+    "category": "分享社区",
+    "title": "易搜",
+    "description": "网盘资源、学习资料集合",
+    "tags": ["网盘搜索", "学习资料", "资源聚合"],
+    "status": "online",
+    "url": "https://yiso.eu.org/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=YiSo"
+  },
+  {
+    "id": 9,
+    "category": "分享社区",
+    "title": "油猴中国",
+    "description": "油猴脚本分享社区",
+    "tags": ["油猴脚本", "浏览器插件", "用户脚本"],
+    "status": "online",
+    "url": "https://greasyfork.wwwnav.com/#google_vignette",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=TampermonkeyCN"
+  },
+  {
+    "id": 10,
+    "category": "分享社区",
+    "title": "油猴插件国内镜像",
+    "description": "油猴插件镜像下载",
+    "tags": ["油猴插件", "镜像站", "工具"],
+    "status": "online",
+    "url": "https://home.greasyfork.org.cn/zh-hans",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=TampermonkeyMirror"
+  },
+  {
+    "id": 11,
+    "category": "分享社区",
+    "title": "小盘资源",
+    "description": "小众网盘资源分享",
+    "tags": ["网盘资源", "小众分享", "资料"],
+    "status": "online",
+    "url": "https://xiaopanziyuan.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=XiaoPan"
+  },
+  {
+    "id": 12,
+    "category": "资源聚合",
+    "title": "虫部落",
+    "description": "聚合搜索与资源导航",
+    "tags": ["聚合搜索", "资源导航", "工具"],
+    "status": "online",
+    "url": "https://www.chongbuluo.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Chongbuluo"
+  },
+  {
+    "id": 13,
+    "category": "资源聚合",
+    "title": "中国科学院知识服务平台",
+    "description": "学术资源与科技文献",
+    "tags": ["学术资源", "科技文献", "科研"],
+    "status": "online",
+    "url": "http://www.las.ac.cn",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=LAS"
+  },
+  {
+    "id": 14,
+    "category": "资源聚合",
+    "title": "IT学习网",
+    "description": "IT技术教程与资源下载",
+    "tags": ["IT教程", "技术资源", "下载"],
+    "status": "online",
+    "url": "http://www.dmzshequ.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=dmzshequ"
+  },
+  {
+    "id": 15,
+    "category": "资源聚合",
+    "title": "文津搜索",
+    "description": "国家图书馆资源检索",
+    "tags": ["图书馆", "资源检索", "学术"],
+    "status": "online",
+    "url": "http://find.nlc.cn",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=WenJin"
+  },
+  {
+    "id": 16,
+    "category": "资源聚合",
+    "title": "永硕E盘",
+    "description": "网盘存储与分享服务",
+    "tags": ["网盘", "存储", "分享"],
+    "status": "online",
+    "url": "https://www.ys168.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=YSEpan"
+  },
+   {
+    "id": 17,
+    "category": "PDF与文档",
+    "title": "科学文库",
+    "description": "科学出版社电子书平台",
+    "tags": ["电子书", "学术", "科学"],
+    "status": "online",
+    "url": "https://book.sciencereading.cn/shop/main/Login/shopFrame.do",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=ScienceRead"
+  },
+  {
+    "id": 18,
+    "category": "PDF与文档",
+    "title": "SaltyLeo 的书架",
+    "description": "个人电子书分享与推荐",
+    "tags": ["电子书", "分享", "书单"],
+    "status": "online",
+    "url": "https://tstrs.me/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=SaltyLeo"
+  },
+  {
+    "id": 19,
+    "category": "PDF与文档",
+    "title": "图灵电子与电气工程丛书",
+    "description": "图灵教育电子电气工程系列书籍",
+    "tags": ["电子电气", "工程", "图灵"],
+    "status": "online",
+    "url": "https://www.aliyundrive.com/s/mmQXebd3CWk/folder/618dcc0769e9e2e3125e4ef29b7d7755f8f30373",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=TulingEE"
+  },
+  {
+    "id": 20,
+    "category": "PDF与文档",
+    "title": "电子工业出版社",
+    "description": "电子信息类图书出版",
+    "tags": ["电子出版", "IT", "教材"],
+    "status": "online",
+    "url": "https://www.phei.com.cn/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=PHEI"
+  },
+  {
+    "id": 21,
+    "category": "PDF与文档",
+    "title": "人民邮电出版社",
+    "description": "信息技术与通信类图书",
+    "tags": ["邮电出版", "IT", "通信"],
+    "status": "online",
+    "url": "https://www.ptpress.com.cn/publishing/book",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=PTpress"
+  },
+  {
+    "id": 22,
+    "category": "PDF与文档",
+    "title": "清华大学出版社",
+    "description": "高校计算机与理工教材",
+    "tags": ["清华出版", "高校教材", "计算机"],
+    "status": "online",
+    "url": "https://www.tup.tsinghua.edu.cn/index.html",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=TsinghuaUP"
+  },
+  {
+    "id": 23,
+    "category": "PDF与文档",
+    "title": "PDF下载（知乎）",
+    "description": "知乎专栏分享的PDF资源",
+    "tags": ["PDF下载", "知乎", "资源"],
+    "status": "online",
+    "url": "https://zhuanlan.zhihu.com/p/8607265996",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=ZhihuPDF"
+  },
+  {
+    "id": 24,
+    "category": "PDF与文档",
+    "title": "科研通",
+    "description": "学术资源互助与下载",
+    "tags": ["学术资源", "文献求助", "科研"],
+    "status": "online",
+    "url": "https://www.ablesci.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=ResearchAble"
+  },
+  {
+    "id": 25,
+    "category": "PDF与文档",
+    "title": "PDF下载（BLOG）",
+    "description": "个人博客分享的PDF电子书",
+    "tags": ["PDF下载", "博客", "电子书"],
+    "status": "online",
+    "url": "https://blog.retompi.com/post/download-ebooks/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=BlogPDF"
+  },
+  {
+    "id": 26,
+    "category": "PDF与文档",
+    "title": "电子书",
+    "description": "综合电子书资源站",
+    "tags": ["电子书", "资源", "下载"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/9e59b23547fc",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=EBook"
+  },
+  {
+    "id": 27,
+    "category": "PDF与文档",
+    "title": "电子书库",
+    "description": "电子书资源库（提取码1111）",
+    "tags": ["电子书", "网盘", "资源库"],
+    "status": "online",
+    "url": "https://pan.baidu.com/s/1494KIB8k0YbOK2qQ1FGXCw",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=pwd=1111 "
+  },
+  {
+    "id": 28,
+    "category": "PDF与文档",
+    "title": "资深工程师",
+    "description": "工程师技术资料与笔记",
+    "tags": ["工程师", "技术资料", "经验"],
+    "status": "online",
+    "url": "https://pan.baidu.com/s/11hxHUwXbxOx5sofJms0GxA?pwd=1234",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=SeniorEng"
+  },
+  {
+    "id": 29,
+    "category": "PDF与文档",
+    "title": "知乎畅销电子书套装（共三十册）",
+    "description": "知乎平台推荐的畅销电子书合集",
+    "tags": ["畅销书", "套装", "知乎"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/c478d1446c3b",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=ZhihuBooks"
+  },
+  {
+    "id": 30,
+    "category": "PDF与文档",
+    "title": "机械工业出版社",
+    "description": "机械、计算机类图书出版",
+    "tags": ["机械出版", "工业", "计算机"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/ead37dea3999#/list/share",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=CMP"
+  },
+  {
+    "id": 31,
+    "category": "PDF与文档",
+    "title": "蜜蜂导航",
+    "description": "实用网站导航工具",
+    "tags": ["导航", "工具", "资源"],
+    "status": "online",
+    "url": "https://www.qiip.cc/sites/684.html",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=BeebeeNav"
+  },
+  {
+    "id": 32,
+    "category": "PDF与文档",
+    "title": "Olib",
+    "description": "电子书管理与阅读工具",
+    "tags": ["电子书管理", "阅读", "开源"],
+    "status": "online",
+    "url": "https://zhuanlan.zhihu.com/p/2004609131877778798",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Olib"
+  },
+  {
+    "id": 33,
+    "category": "PDF与文档",
+    "title": "湖北图书馆",
+    "description": "湖北省图书馆数字资源",
+    "tags": ["公共图书馆", "数字资源", "学术"],
+    "status": "online",
+    "url": "https://www.library.hb.cn",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=HubeiLib"
+  },
+  {
+    "id": 34,
+    "category": "PDF与文档",
+    "title": "中国科技云 @Mai",
+    "description": "科研云平台资源",
+    "tags": ["科研云", "科技资源", "学术"],
+    "status": "online",
+    "url": "https://iam.sciencereading.cn/login/welcome",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=CSTCloud"
+  },
+  {
+    "id": 35,
+    "category": "PDF与文档",
+    "title": "夸克资源小海",
+    "description": "夸克网盘资源分享",
+    "tags": ["网盘资源", "夸克", "分享"],
+    "status": "online",
+    "url": "https://link3.cc/quarkresource",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=QuarkXH"
+  },
+  {
+    "id": 36,
+    "category": "PDF与文档",
+    "title": "学习资源船仓",
+    "description": "学习资料聚合分享",
+    "tags": ["学习资料", "网盘", "资源"],
+    "status": "online",
+    "url": "https://tuostudy.top/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=LearnShip"
+  },
+  {
+    "id": 37,
+    "category": "PDF与文档",
+    "title": "爱分享资源网",
+    "description": "各类资源分享社区",
+    "tags": ["资源分享", "网盘", "软件"],
+    "status": "online",
+    "url": "https://www.afxw5.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=AiShare"
+  },
+  {
+    "id": 38,
+    "category": "PDF与文档",
+    "title": "非凡图书",
+    "description": "电子书下载与推荐",
+    "tags": ["电子书", "下载", "推荐"],
+    "status": "online",
+    "url": "http://www.feifanlib.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=FeiFanBook"
+  },
+  {
+    "id": 39,
+    "category": "PDF与文档",
+    "title": "b站付费",
+    "description": "B站付费课程/资源合集",
+    "tags": ["B站", "付费课程", "资源"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/35761ff756fb",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=BiliPaid"
+  },
+  {
+    "id": 40,
+    "category": "PDF与文档",
+    "title": "金屋电子书",
+    "description": "电子书分享网站",
+    "tags": ["电子书", "分享", "下载"],
+    "status": "online",
+    "url": "https://pdfs.top",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=JinWuEbook"
+  },
+  {
+    "id": 41,
+    "category": "PDF与文档",
+    "title": "多蛋网",
+    "description": "资源分享与交流社区",
+    "tags": ["资源分享", "论坛", "交流"],
+    "status": "online",
+    "url": "https://www.duodown.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=DuoDan"
+  },
+  {
+    "id": 42,
+    "category": "PDF与文档",
+    "title": "notebooklm",
+    "description": "Google NotebookLM 笔记工具",
+    "tags": ["AI笔记", "Google", "工具"],
+    "status": "online",
+    "url": "https://notebooklm.google",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=NotebookLM"
+  },
+  {
+    "id": 43,
+    "category": "PDF与文档",
+    "title": "三联",
+    "description": "三联生活周刊数字版",
+    "tags": ["杂志", "文化", "阅读"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/2c7c6f33e6d0#/list/share/422e6f916ff14e0f8f84f7d32dfc39e3",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=SanLian"
+  },
+  {
+    "id": 44,
+    "category": "PDF与文档",
+    "title": "图灵电子与电气工程丛书",
+    "description": "百度网盘（提取码：7ybh）",
+    "tags": ["电子书", "电气工程", "图灵", "百度网盘"],
+    "status": "online",
+    "url": "https://pan.baidu.com/s/1nM4nxPFdA-wNYS17tEnSRA?pwd=7ybh",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Tuling_Books"
+  },
+  {
+    "id": 45,
+    "category": "PDF与文档",
+    "title": "图灵电子与电气工程丛书",
+    "description": "夸克网盘",
+    "tags": ["电子书", "电气工程", "图灵", "夸克网盘"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/78db14aee3e9",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Tuling_Books"
+  },
+  {
+    "id": 46,
+    "category": "PDF与文档",
+    "title": "图灵电子与电气工程丛书",
+    "description": "百度网盘（提取码：N3Zu）",
+    "tags": ["电子书", "电气工程", "图灵", "百度网盘"],
+    "status": "online",
+    "url": "https://pan.baidu.com/s/1yM-fB33B73dtrT-tCuwKXQ?pwd=N3Zu",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Tuling_Books"
+  },
+  {
+    "id": 47,
+    "category": "PDF与文档",
+    "title": "图灵电子与电气工程丛书",
+    "description": "夸克网盘",
+    "tags": ["电子书", "电气工程", "图灵", "夸克网盘"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/2783d74f88c5",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Tuling_Books"
+  },
+  {
+    "id": 48,
+    "category": "资源聚合",
+    "title": "海搜",
+    "description": "免费的多网盘一站式资源搜索引擎，收录文件超50PB，每日新增海量资源。",
+    "tags": ["网盘搜索", "资源聚合", "云盘", "免费搜索"],
+    "status": "online",
+    "url": "https://haisou.cc",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=HaiSou"
+    },
+    {
+    "id": 49,
+    "category": "PCB与电子工程",
+    "title": "逆天PCB",
+    "description": "PCB设计、EDA工具交流",
+    "tags": ["PCB设计", "EDA工具", "论坛"],
+    "status": "online",
+    "url": "https://bbs.ntpcb.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=NiTianPCB"
+  },
+  {
+    "id": 50,
+    "category": "PCB与电子工程",
+    "title": "EDA365",
+    "description": "电子工程师论坛",
+    "tags": ["EDA", "论坛", "电子工程"],
+    "status": "online",
+    "url": "https://www.eda365.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=EDA365"
+  },
+  {
+    "id": 51,
+    "category": "PCB与电子工程",
+    "title": "面包板",
+    "description": "电子工程师社区",
+    "tags": ["社区", "电子工程", "面包板"],
+    "status": "online",
+    "url": "https://mbb.eet-china.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=MianBaoBan"
+  },
+  {
+    "id": 52,
+    "category": "PCB与电子工程",
+    "title": "电子工程世界",
+    "description": "电子技术门户",
+    "tags": ["电子技术", "门户", "资讯"],
+    "status": "online",
+    "url": "https://www.eeworld.com.cn",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=EEWorld"
+  },
+  {
+    "id": 53,
+    "category": "PCB与电子工程",
+    "title": "21ic电子网",
+    "description": "电子工程师资源站",
+    "tags": ["资源站", "电子工程", "21ic"],
+    "status": "online",
+    "url": "https://www.21ic.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=21ic"
+  },
+  {
+    "id": 54,
+    "category": "PCB与电子工程",
+    "title": "一牛网",
+    "description": "嵌入式、物联网技术交流",
+    "tags": ["嵌入式", "物联网", "技术交流"],
+    "status": "online",
+    "url": "https://www.16rd.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=YiNiu"
+  },
+  {
+    "id": 55,
+    "category": "PCB与电子工程",
+    "title": "PCB联盟",
+    "description": "PCB技术交流社区",
+    "tags": ["PCB", "联盟", "论坛"],
+    "status": "online",
+    "url": "https://www.pcbbar.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=PCBUnion"
+  },
+  {
+    "id": 56,
+    "category": "PCB与电子工程",
+    "title": "PCB技术网",
+    "description": "PCB技术分享与学习",
+    "tags": ["PCB技术", "学习", "分享"],
+    "status": "online",
+    "url": "http://www.pcbbbs.com/",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=PCBTea"
+  },
+  {
+    "id": 57,
+    "category": "PCB与电子工程",
+    "title": "凡亿网课",
+    "description": "PCB设计在线课程",
+    "tags": ["PCB设计", "网课", "培训"],
+    "status": "online",
+    "url": "http://wpfx.org.cn/go/?url=https://pan.baidu.com/s/1royQE2Liifwa69XFsy7hhQ?pwd=wpfx",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=FanYi"
+  },
+  {
+    "id": 58,
+    "category": "PCB与电子工程",
+    "title": "PCB资料分享1",
+    "description": "夸克网盘PCB资源",
+    "tags": ["夸克网盘", "PCB资料", "分享"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/b033fa830158#/list/share",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=QuarkPCB1"
+  },
+  {
+    "id": 59,
+    "category": "PCB与电子工程",
+    "title": "PCB资料分享2",
+    "description": "夸克网盘PCB资源",
+    "tags": ["夸克网盘", "PCB资料", "分享"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/fb27beb1ad0c#/list/share",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=QuarkPCB2"
+  },
+  {
+    "id": 60,
+    "category": "PCB与电子工程",
+    "title": "PCB资料分享3",
+    "description": "阿里云盘PCB资源",
+    "tags": ["阿里云盘", "PCB资料", "分享"],
+    "status": "online",
+    "url": "https://www.alipan.com/s/JXgAnqQKVAT",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=AliPCB"
+  },
+  {
+    "id": 61,
+    "category": "资源聚合",
+    "title": "鱼皮编程资源-鱼皮项目合集",
+    "description": "夸克网盘：鱼皮编程项目合集",
+    "tags": ["编程资源", "项目合集", "夸克网盘", "鱼皮"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/eff1437ce5e9",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Yupi_Projects"
+  },
+  {
+    "id": 62,
+    "category": "办公软件",
+    "title": "Listary",
+    "description": "Windows 效率启动器与文件搜索工具",
+    "tags": ["文件搜索", "效率工具", "启动器", "Windows"],
+    "status": "online",
+    "url": "https://www.listary.com",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=Listary"
+  },
+  {
+    "id": 63,
+    "category": "资源聚合",
+    "title": "光鸭网盘",
+    "description": "网盘资源搜索与分享平台",
+    "tags": ["网盘搜索", "资源聚合", "导航"],
+    "status": "online",
+    "url": "https://www.guangyapan.com/#/home/all",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=GuangYa"
+  },
+  {
+    "id": 64,
+    "category": "资源聚合",
+    "title": "鬼刀壁纸",
+    "description": "夸克网盘：鬼刀系列壁纸资源",
+    "tags": ["壁纸", "夸克网盘", "鬼刀"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/17cad4e62ba6#/list/share",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=GuiDao"
+  },
+  {
+    "id": 65,
+    "category": "资源聚合",
+    "title": "2020-2023出版新书",
+    "description": "夸克网盘：2020-2023年出版新书合集",
+    "tags": ["电子书", "新书", "夸克网盘"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/41f27520b353#/list/share",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=NewBooks2020-2023"
+  },
+  {
+    "id": 66,
+    "category": "资源聚合",
+    "title": "精选好书",
+    "description": "夸克网盘：精选好书资源（提取码：NMjw）",
+    "tags": ["电子书", "精选", "夸克网盘"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/a53940dad342?pwd=NMjw#/list/share",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=SelectedBooks"
+  },
+  {
+    "id": 67,
+    "category": "资源聚合",
+    "title": "计算机技术专属书籍",
+    "description": "夸克网盘：计算机技术相关电子书合集",
+    "tags": ["计算机书籍", "电子书", "夸克网盘"],
+    "status": "online",
+    "url": "https://pan.quark.cn/s/93e5e88e5271",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=CompBooks"
+  },
+  {
+    "id": 68,
+    "category": "资源聚合",
+    "title": "2026资料库",
+    "description": "阿里云盘：2026年度资料合集",
+    "tags": ["资料库", "阿里云盘", "2026"],
+    "status": "online",
+    "url": "https://www.alipan.com/s/PKHsnNLinm8",
+    "image": "https://placehold.co/600x400/e2e8f0/64748b?text=2026Data"
+  }
+]
