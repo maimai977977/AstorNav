@@ -116,10 +116,10 @@ const categories = ['全部', ...new Set(navData.map(item => item.category).filt
           id={item.id}
           title={item.title}
           description={item.description}
-          tags={item.tags}
+          tags={item.tags as string[]}
           status={item.status as "online" | "offline"}
           url={item.url}
-          image={item.image}
+          image={item.image as string}
         />
       </div>
     ))}
