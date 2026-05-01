@@ -40,7 +40,17 @@ const categories = ['全部', ...new Set(navData.map(item => item.category).filt
           </div>
                     <!-- 美化搜索框 + QQ头像（圆形旋转） -->
 <div class="flex items-center gap-3">
-  <!-- 搜索框 -->
+    <!-- 文件夹视图入口按钮 -->
+  <a 
+    href="/AstroNav/folder" 
+    class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+    title="GO MY FOLDER"
+  >
+    <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+    </svg>
+  </a>
+ <!-- 搜索框 -->
   <div class="relative">
     <input
       type="text"
@@ -113,13 +123,13 @@ const categories = ['全部', ...new Set(navData.map(item => item.category).filt
     {navData.map(item => (
       <div class="card-item" data-category={item.category}>
         <NavCard 
-          id={item.id}
-          title={item.title}
-          description={item.description}
-          tags={item.tags as string[]}
-          status={item.status as "online" | "offline"}
-          url={item.url}
-          image={item.image as string}
+            id={item.id as number}
+            title={item.title as string}
+            description={item.description as string}
+            tags={item.tags as string[]}
+            status={item.status as "online" | "offline"}
+            url={item.url as string}
+            image={item.image as string}
         />
       </div>
     ))}
