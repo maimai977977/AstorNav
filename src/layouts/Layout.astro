@@ -3,7 +3,6 @@
 import '../styles/global.css'
 import NavCard from '../components/NavCard.astro';
 import navData from '../data/Navdata.json';   
-import TimeCounter from '../components/TimeCounter.astro';
 
 export interface Props {
   title?: string;
@@ -152,8 +151,6 @@ const categories = ['全部', ...new Set(navData.map(item => item.category).filt
         </span>
         <span class="text-xs text-cyan-400/70 animate-pulse">✨</span>
       </div>
-      <!-- 网站启动日期 -->
-      <TimeCounter client:load / />
       <!-- 社交图标（紧凑） -->
       <div class="flex gap-3">
         <a href="#" class="group w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-cyan-500 transition-all duration-300 hover:scale-110">
@@ -301,6 +298,8 @@ if (qqAvatar) {
         quoteEl.textContent = '✨ 长风破浪会有时，直挂云帆济沧海。';
       });
   }
+
+  
   
 </script>
 <!-- 动画（只需保留 shimmer） -->
