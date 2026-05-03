@@ -6,8 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://maimai977977.github.io',
-     base: '/AstroNav/',     // 注意开头的斜杠和末尾的斜杠
-       outDir: './dist', 
+    base: '/AstroNav/',     // 注意开头的斜杠和末尾的斜杠
+    outDir: './dist', 
   vite: {
     plugins: [tailwindcss()]
   },

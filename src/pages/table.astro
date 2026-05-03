@@ -3,7 +3,6 @@
 import TableLayout from '../layouts/TableLayout.astro';
 import tableData from '../data/tableData.json';
 
-// 定义数据类型
 interface DataItem {
   id: number;
   category: string;
@@ -17,77 +16,113 @@ interface DataItem {
 }
 
 const allData = tableData as DataItem[];
-
-// 提取所有分类
 const categories = ['全部', ...new Set(allData.map(item => item.category))];
-
 const totalCount = allData.length;
 ---
 
-<TableLayout title="夸克网盘资源库">
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-    <div class="container mx-auto px-4 py-6 max-w-7xl">
+<TableLayout title="文档资源库">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
       
       <!-- 头部导航 -->
-      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
-        <div class="flex items-center gap-3">
-          <a href="/AstroNav/" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition">
-            ← 返回首页
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200/50 dark:border-slate-700/50">
+        <div class="flex items-center gap-4">
+          <a href="/AstroNav/" class="group flex items-center gap-2 text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-all">
+            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span class="text-sm">返回首页</span>
           </a>
-          <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            📦 网盘资源库
-          </h1>
+          <div class="w-px h-6 bg-slate-300 dark:bg-slate-700"></div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/25">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2 1.5 4 4 4h8c2.5 0 4-2 4-4V7M4 7h16M4 7l4-4h8l4 4" />
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                文档资源库
+              </h1>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">共 {totalCount} 条资源 · 点击访问查看详情</p>
+            </div>
+          </div>
         </div>
         <div class="flex items-center gap-3">
-          <span class="text-sm text-gray-500 dark:text-gray-400">共 {totalCount} 条资源</span>
+          <span class="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {totalCount} 条资源
+          </span>
         </div>
       </div>
 
       <!-- 主容器 -->
       <div id="app">
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <!-- 工具栏 -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div class="flex gap-2">
-            <button id="cardViewBtn" class="px-4 py-2 rounded-lg bg-blue-500 text-white transition-all">📇 卡片视图</button>
-            <button id="tableViewBtn" class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 transition-all">📋 表格视图</button>
+            <button id="cardViewBtn" class="px-4 py-2 rounded-xl bg-blue-500 text-white transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+              卡片视图
+            </button>
+            <button id="tableViewBtn" class="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-18 4h18M3 6h18" />
+              </svg>
+              表格视图
+            </button>
           </div>
-          <div class="relative">
-            <input type="text" id="searchInput" placeholder="🔍 搜索标题、描述..." class="w-64 px-4 py-2 pl-9 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="relative flex-1 max-w-md">
+            <input type="text" id="searchInput" placeholder="🔍 搜索标题、描述..." class="w-full px-4 py-2.5 pl-10 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all placeholder:text-slate-400" />
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
         </div>
 
-        <div id="categoryContainer" class="flex flex-wrap gap-2 mb-4"></div>
-        <div id="cardContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
-        <div id="tableContainer" class="overflow-x-auto hidden"></div>
-        <div id="pagination" class="flex justify-center gap-2 mt-6"></div>
-        <div id="noDataMsg" class="text-center py-12 text-gray-500 hidden">
-          <svg class="w-12 h-12 mx-auto mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <p>没有找到相关资源</p>
+        <!-- 分类标签 -->
+        <div id="categoryContainer" class="flex flex-wrap gap-2 mb-6"></div>
+
+        <!-- 卡片视图 -->
+        <div id="cardContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+
+        <!-- 表格视图 -->
+        <div id="tableContainer" class="hidden"></div>
+
+        <!-- 分页 -->
+        <div id="pagination" class="flex justify-center gap-2 mt-8"></div>
+
+        <!-- 空状态 -->
+        <div id="noDataMsg" class="text-center py-16 hidden">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+            <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-slate-500 dark:text-slate-400">没有找到相关资源</p>
         </div>
       </div>
 
-      <footer class="mt-8 pt-4 text-center text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-        <p>© 网盘资源库 · 共 {totalCount} 条资源 · 数据仅供学习参考
-          本站所提供的网址和资源均来源于互联网公开渠道，所有链接均指向第三方网盘或网站，
-          本站不储存、复制、传播任何文件，其网盘资源文件的完整性需要您自行判断。如有侵犯您的权益，
-          请发送相关证明文件至邮箱 maimai977977@gmail.com 及时与我们联系进行屏蔽删除处理！
-          谢谢！净网声明 - 版权说明 - 免责声明</p>
+      <footer class="mt-12 pt-6 border-t border-slate-200/50 dark:border-slate-700/50">
+        <p class="text-center text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          © 文档资源库 · 共 {totalCount} 条资源 · 数据仅供学习参考
+          <br/>本站不储存、复制、传播任何文件 · 如有侵权请联系 <a href="mailto:maimai977977@gmail.com" class="text-blue-500 hover:text-blue-400 transition-colors">maimai977977@gmail.com</a>
+        </p>
       </footer>
     </div>
   </div>
 </TableLayout>
 
 <script define:vars={{ allData, categories }}>
-  // 直接使用 Astro 注入的变量
   let filteredData = [];
   let currentView = 'card';
   let currentCategory = '全部';
   let currentPage = 1;
-  const pageSize = 50;
+  const pageSize = 12;
   
   let cardContainer, tableContainer, categoryContainer, paginationDiv, noDataMsg;
   
@@ -103,12 +138,14 @@ const totalCount = allData.length;
   
   function renderCategories() {
     if (!categoryContainer) return;
-    let html = '';
+    let html = '<div class="flex items-center gap-2 flex-wrap">';
+    html += '<span class="text-xs text-slate-500 mr-1">分类:</span>';
     for (let cat of categories) {
       const count = cat === '全部' ? allData.length : allData.filter(item => item.category === cat).length;
-      const activeClass = currentCategory === cat ? 'bg-blue-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300';
-      html += `<button class="category-btn px-3 py-1 rounded-full text-sm transition-all ${activeClass}" data-category="${cat}">${escapeHtml(cat)} (${count})</button>`;
+      const activeClass = currentCategory === cat ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-blue-500/50';
+      html += `<button class="category-btn px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${activeClass}" data-category="${cat}">${escapeHtml(cat)} <span class="ml-1 opacity-60">(${count})</span></button>`;
     }
+    html += '</div>';
     categoryContainer.innerHTML = html;
     
     document.querySelectorAll('.category-btn').forEach(btn => {
@@ -159,24 +196,25 @@ const totalCount = allData.length;
     
     let html = '';
     for (let item of pageData) {
-      const statusClass = item.status === 'online' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-700';
+      const statusClass = item.status === 'online' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-500' : 'bg-slate-50 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border-slate-500';
       const imageUrl = item.image || `https://placehold.co/600x400/e2e8f0/64748b?text=${encodeURIComponent(item.title.slice(0, 20))}`;
       
       html += `
-        <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1">
-          <div class="h-32 overflow-hidden bg-gray-100 dark:bg-gray-700">
-            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover" loading="lazy" onerror="this.src='https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'" />
+        <div class="group bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1">
+          <div class="h-40 overflow-hidden bg-slate-100 dark:bg-slate-700">
+            <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" onerror="this.src='https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'" />
           </div>
-          <div class="p-3">
-            <div class="flex items-start justify-between gap-2">
-              <h3 class="text-sm font-bold text-gray-800 dark:text-white line-clamp-2 flex-1">${escapeHtml(item.title)}</h3>
-              <span class="text-xs px-2 py-0.5 rounded-full ${statusClass}">${item.status === 'online' ? '在线' : '离线'}</span>
+          <div class="p-4">
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <h3 class="text-sm font-bold text-slate-800 dark:text-white line-clamp-2 flex-1">${escapeHtml(item.title)}</h3>
+              <span class="text-[10px] px-2 py-0.5 rounded-full border-l-2 ${statusClass} flex-shrink-0">${item.status === 'online' ? '在线' : '离线'}</span>
             </div>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${escapeHtml(item.description || '暂无描述')}</p>
-            ${item.time ? `<div class="flex flex-wrap gap-1 mt-2"><span class="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-500">${escapeHtml(item.time)}</span></div>` : ''}
-            <div class="mt-3">
-              <a href="${escapeHtml(item.url)}" target="_blank" class="block text-center text-xs py-1.5 px-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all">查看资源 →</a>
-            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-3">${escapeHtml(item.description || '暂无描述')}</p>
+            ${item.time ? `<div class="flex flex-wrap gap-1 mb-3"><span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-500">${escapeHtml(item.time)}</span></div>` : ''}
+            <a href="${escapeHtml(item.url)}" target="_blank" class="block text-center text-xs py-2 px-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl transition-all shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 group/btn relative overflow-hidden">
+              <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></span>
+              <span class="relative flex items-center justify-center gap-1">查看资源 <svg class="w-3 h-3 transition-transform group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></span>
+            </a>
           </div>
         </div>
       `;
@@ -198,18 +236,25 @@ const totalCount = allData.length;
       return;
     }
     
-    let html = `<table class="w-full text-sm border-collapse"><thead class="bg-gray-100 dark:bg-gray-800"><tr><th class="px-4 py-2 text-left">ID</th><th class="px-4 py-2 text-left">标题</th><th class="px-4 py-2 text-left hidden md:table-cell">分类</th><th class="px-4 py-2 text-left hidden lg:table-cell">时间</th><th class="px-4 py-2 text-left">操作</th></tr></thead><tbody>`;
+    let html = `<div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 overflow-hidden shadow-sm"><table class="w-full text-sm">
+      <thead class="bg-slate-50 dark:bg-slate-700/50"><tr>
+        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300">ID</th>
+        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300">标题</th>
+        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 hidden md:table-cell">分类</th>
+        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 hidden lg:table-cell">时间</th>
+        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300">操作</th>
+      </tr></thead><tbody>`;
     
     for (let item of pageData) {
-      html += `<tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800/50">
-        <td class="px-4 py-2 text-gray-500">${item.id}</td>
-        <td class="px-4 py-2"><div class="font-medium text-gray-800 dark:text-white truncate">${escapeHtml(item.title)}</div><div class="text-xs text-gray-500 truncate">${escapeHtml(item.description || '')}</div></td>
-        <td class="px-4 py-2 hidden md:table-cell"><span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">${escapeHtml(item.category)}</span></td>
-        <td class="px-4 py-2 hidden lg:table-cell text-gray-500">${item.time || ''}</td>
-        <td class="px-4 py-2"><a href="${escapeHtml(item.url)}" target="_blank" class="text-blue-500 hover:text-blue-600 text-sm">访问</a></td>
+      html += `<tr class="border-t border-slate-200/50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+        <td class="px-4 py-3 text-slate-500">${item.id}</td>
+        <td class="px-4 py-3"><div class="font-medium text-slate-800 dark:text-white text-sm">${escapeHtml(item.title)}</div><div class="text-xs text-slate-500 mt-0.5 line-clamp-1">${escapeHtml(item.description || '')}</div></td>
+        <td class="px-4 py-3 hidden md:table-cell"><span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">${escapeHtml(item.category)}</span></td>
+        <td class="px-4 py-3 hidden lg:table-cell text-slate-500 text-xs">${item.time || '-'}</td>
+        <td class="px-4 py-3"><a href="${escapeHtml(item.url)}" target="_blank" class="inline-flex items-center gap-1 text-blue-500 hover:text-blue-600 dark:text-blue-400 text-sm font-medium group">访问 <svg class="w-3 h-3 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></a></td>
       </tr>`;
     }
-    html += `</tbody></table>`;
+    html += `</tbody></table></div>`;
     tableContainer.innerHTML = html;
   }
   
@@ -217,9 +262,12 @@ const totalCount = allData.length;
     const totalPages = Math.ceil(filteredData.length / pageSize);
     if (totalPages <= 1) { paginationDiv.innerHTML = ''; return; }
     
-    paginationDiv.innerHTML = `<button id="prevPageBtn" class="px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">上一页</button>
-      <span class="px-4 py-1 text-gray-600 dark:text-gray-400">第 ${currentPage} / ${totalPages} 页 (共 ${filteredData.length} 条)</span>
-      <button id="nextPageBtn" class="px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">下一页</button>`;
+    let html = '<div class="flex items-center gap-2">';
+    html += `<button id="prevPageBtn" class="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 transition disabled:opacity-50" ${currentPage <= 1 ? 'disabled' : ''}>上一页</button>`;
+    html += `<span class="px-4 py-2 text-sm text-slate-600 dark:text-slate-400">第 ${currentPage} / ${totalPages} 页 (共 ${filteredData.length} 条)</span>`;
+    html += `<button id="nextPageBtn" class="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 transition disabled:opacity-50" ${currentPage >= totalPages ? 'disabled' : ''}>下一页</button>`;
+    html += '</div>';
+    paginationDiv.innerHTML = html;
     
     document.getElementById('prevPageBtn')?.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderCurrentView(); renderPagination(); } });
     document.getElementById('nextPageBtn')?.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderCurrentView(); renderPagination(); } });
@@ -228,14 +276,14 @@ const totalCount = allData.length;
   function bindEvents() {
     document.getElementById('cardViewBtn')?.addEventListener('click', () => {
       currentView = 'card'; currentPage = 1;
-      document.getElementById('cardViewBtn').className = 'px-4 py-2 rounded-lg bg-blue-500 text-white transition-all';
-      document.getElementById('tableViewBtn').className = 'px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 transition-all';
+      document.getElementById('cardViewBtn').className = 'px-4 py-2 rounded-xl bg-blue-500 text-white transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2';
+      document.getElementById('tableViewBtn').className = 'px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 flex items-center gap-2';
       renderCurrentView(); renderPagination();
     });
     document.getElementById('tableViewBtn')?.addEventListener('click', () => {
       currentView = 'table'; currentPage = 1;
-      document.getElementById('tableViewBtn').className = 'px-4 py-2 rounded-lg bg-blue-500 text-white transition-all';
-      document.getElementById('cardViewBtn').className = 'px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 transition-all';
+      document.getElementById('tableViewBtn').className = 'px-4 py-2 rounded-xl bg-blue-500 text-white transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2';
+      document.getElementById('cardViewBtn').className = 'px-4 py-2 rounded-xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all border border-slate-200 dark:border-slate-700 hover:border-blue-500/50 flex items-center gap-2';
       renderCurrentView(); renderPagination();
     });
     document.getElementById('searchInput')?.addEventListener('input', () => { currentPage = 1; updateFilterAndRender(); });

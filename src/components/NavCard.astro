@@ -16,83 +16,85 @@ const isOnline = status === 'online';
 const safeTags = Array.isArray(tags) ? tags.slice(0, 3) : [];
 const hasMoreTags = Array.isArray(tags) && tags.length > 3;
 
-// 为标签分配不同的颜色（基于标签内容的哈希值）
 function getTagColor(tag: string): string {
   const colors = [
-    'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-l-blue-500',
-    'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-l-green-500',
-    'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border-l-purple-500',
-    'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300 border-l-orange-500',
-    'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300 border-l-pink-500',
-    'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300 border-l-indigo-500',
+    'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-blue-500',
+    'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 border-emerald-500',
+    'bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border-purple-500',
+    'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 border-amber-500',
+    'bg-pink-50 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300 border-pink-500',
+    'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300 border-indigo-500',
   ];
   const index = tag.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % colors.length;
   return colors[index];
 }
 ---
 
-<div class="group relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-xl border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full overflow-hidden">
+<div class="group relative bg-white dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full overflow-hidden">
   
   <!-- 图片区 -->
-  <div class="relative h-32 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
+  <div class="relative h-36 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
     <img
       src={image || 'https://placehold.co/600x400/e2e8f0/64748b?text=No+Image'}
       alt={title}
-      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
       loading="lazy"
       onerror="this.onerror=null; this.style.display='none';"
     />
+    <!-- 渐变遮罩 -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    
     <!-- 状态徽章 -->
-    <div class={`absolute top-2 right-2 backdrop-blur-md rounded-full px-2 py-0.5 text-[11px] font-semibold shadow-md ${isOnline ? 'bg-green-500/80 text-white' : 'bg-red-500/80 text-white'}`}>
-      <div class="flex items-center gap-1">
-        <span class={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-white animate-pulse' : 'bg-gray-200'}`}></span>
+    <div class={`absolute top-3 right-3 backdrop-blur-md rounded-full px-2.5 py-1 text-[11px] font-semibold shadow-lg ${isOnline ? 'bg-emerald-500/90 text-white' : 'bg-red-500/90 text-white'}`}>
+      <div class="flex items-center gap-1.5">
+        <span class={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-white animate-pulse' : 'bg-white/50'}`}></span>
         <span>{isOnline ? '在线' : '离线'}</span>
       </div>
     </div>
   </div>
 
   <!-- 内容区 -->
-  <div class="p-3 flex flex-col flex-1">
-    <h3 class="text-sm font-bold text-gray-800 dark:text-white line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+  <div class="p-4 flex flex-col flex-1">
+    <h3 class="text-base font-bold text-slate-800 dark:text-white line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
       {title}
     </h3>
-    <p class="text-gray-500 dark:text-gray-400 text-xs mt-1 line-clamp-1 leading-tight">
-  {description || '暂无描述'}
+    <p class="text-slate-500 dark:text-slate-400 text-xs mt-1.5 line-clamp-2 leading-relaxed">
+      {description || '暂无描述'}
     </p>
     
-    <!-- 标签区（彩色装饰：左侧彩色条 + 背景色） -->
-    <div class="flex flex-wrap gap-1 mt-2">
+    <!-- 标签区 -->
+    <div class="flex flex-wrap gap-1.5 mt-3">
       {safeTags.map(tag => {
         const tagColor = getTagColor(tag);
         return (
-          <span class={`px-2 py-0.5 text-[10px] font-medium rounded-full border-l-4 ${tagColor} shadow-sm`}>
+          <span class={`px-2 py-0.5 text-[10px] font-medium rounded-full border-l-2 ${tagColor}`}>
             {tag}
           </span>
         );
       })}
       {hasMoreTags && (
-        <span class="px-2 py-0.5 text-[10px] rounded-full bg-gray-200/80 text-gray-500 dark:bg-gray-700/80 dark:text-gray-400">
+        <span class="px-2 py-0.5 text-[10px] rounded-full bg-slate-100 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400">
           +{tags.length - 3}
         </span>
       )}
       {safeTags.length === 0 && (
-        <span class="px-2 py-0.5 text-[10px] rounded-full bg-gray-100/50 text-gray-400 dark:bg-gray-800/50 dark:text-gray-500">
+        <span class="px-2 py-0.5 text-[10px] rounded-full bg-slate-50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-500">
           未分类
         </span>
       )}
     </div>
 
-    <!-- 美化后的按钮（渐变边框+图标动效） -->
-    <div class="mt-3">
+    <!-- 访问按钮 -->
+    <div class="mt-auto pt-3">
       <a
         href={url}
         target="_blank"
         rel="noopener noreferrer"
         class={`
-          relative inline-flex items-center justify-center w-full py-1.5 px-2 text-xs font-medium rounded-lg transition-all duration-200 overflow-hidden
+          relative inline-flex items-center justify-center w-full py-2 px-4 text-sm font-medium rounded-xl transition-all duration-300 overflow-hidden
           ${isOnline
-            ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md hover:shadow-lg active:scale-95 group/btn'
-            : 'bg-gray-200/70 dark:bg-gray-700/70 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+            ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40 hover:from-blue-600 hover:to-blue-700 active:scale-[0.98] group/btn'
+            : 'bg-slate-100 dark:bg-slate-700/50 text-slate-400 dark:text-slate-500 cursor-not-allowed'
           }
         `}
         {...(isOnline ? {} : { tabIndex: -1, 'aria-disabled': 'true' })}
@@ -100,11 +102,13 @@ function getTagColor(tag: string): string {
         {isOnline && (
           <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></span>
         )}
-        <span class="relative flex items-center gap-1">
-          <span>立即访问</span>
-          <svg class="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
+        <span class="relative flex items-center gap-2">
+          <span>{isOnline ? '立即访问' : '不可用'}</span>
+          {isOnline && (
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          )}
         </span>
       </a>
     </div>

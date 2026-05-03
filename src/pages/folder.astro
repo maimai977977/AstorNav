@@ -1,5 +1,4 @@
----
-// src/pages/folder.astro
+﻿---
 import FolderLayout from '../layouts/FolderLayout.astro';
 import roomData from '../data/roomdata.json';
 
@@ -14,262 +13,191 @@ interface NavItem {
   image: string;
 }
 
-const safeData = Array.isArray(roomData) ? roomData : [];
+const raw = roomData as NavItem[];
+const folderMap = new Map<string, NavItem[]>();
+raw.forEach(item => {
+  const cat = item.category || '未分类';
+  if (!folderMap.has(cat)) folderMap.set(cat, []);
+  folderMap.get(cat)!.push(item);
+});
 
-// 按分类分组（用于服务端统计）
-const groupedItems = safeData.reduce((acc, item) => {
-  const folderName = item.category || '未分类';
-  if (!acc[folderName]) acc[folderName] = [];
-  acc[folderName].push(item);
-  return acc;
-}, {} as Record<string, NavItem[]>);
+const folders = Array.from(folderMap.entries())
+  .map(([name, items]) => ({ name, items, count: items.length }))
+  .sort((a, b) => b.count - a.count);
 
-const categoryCounts = Object.fromEntries(
-  Object.entries(groupedItems).map(([name, items]) => [name, items.length])
-);
-
-const totalCount = safeData.length;
-const categoriesCount = Object.keys(groupedItems).length;
-const BATCH_SIZE = 100; // 每批加载数量
+const total = raw.length;
+const INITIAL_SHOW = 8;
+const remaining = folders.slice(INITIAL_SHOW);
 ---
 
-<FolderLayout title="MaiMai · 资源库">
-  <!-- 加载指示器 -->
-  <div id="loadingIndicator" class="fixed bottom-4 right-4 bg-cyan-500/80 text-white px-3 py-1 rounded-full text-xs hidden z-50">
-    加载中...
-  </div>
-  
-  <canvas id="gradientCanvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
-  
-  <div class="relative z-10 min-h-screen text-slate-200 antialiased backdrop-blur-[1px]">
-    <div class="container mx-auto px-4 py-6 max-w-5xl">
-      
-      <!-- 头部区域 -->
-      <div class="flex items-center justify-between mb-6 pb-2 border-b border-cyan-500/30 flex-wrap gap-3">
+<FolderLayout title="文档导航">
+  <div class="min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 py-6 max-w-6xl">
+      <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-200">
+        <a href="/AstroNav/" class="text-gray-500 hover:text-blue-600 transition flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+          <span class="text-sm">返回</span>
+        </a>
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center shadow-lg shadow-cyan-500/25 animate-pulse-glow">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
-            </svg>
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-md">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2z" /></svg>
           </div>
-          <h1 class="text-xl font-semibold tracking-tight bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            资源仓库
-          </h1>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded-full">
-            📊 {totalCount} 个资源
-          </span>
-          <a href="/AstroNav/" class="text-xs text-slate-400 hover:text-cyan-400 transition flex items-center gap-1 group">
-            <svg class="w-3 h-3 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-            返回首页
-          </a>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">文档导航</h1>
+            <p class="text-xs text-gray-500">{total} 个资源 · {folders.length} 个分类</p>
+          </div>
         </div>
       </div>
 
-      <!-- 搜索框 -->
-      <div class="mb-6">
+      <div class="mb-6 max-w-2xl mx-auto">
         <div class="relative">
-          <input 
-            type="text" 
-            id="searchInput"
-            placeholder="🔍 搜索资源..."
-            class="w-full px-4 py-2.5 pl-10 rounded-xl bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 focus:border-cyan-500/70 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 text-slate-200 placeholder-slate-500 transition-all"
-          />
-          <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+          <input id="searchInput" type="text" placeholder="搜索资源..." class="w-full px-4 py-2.5 pl-10 rounded-xl bg-white border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 text-sm text-gray-800 placeholder-gray-400" />
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z" /></svg>
         </div>
       </div>
 
-      <!-- 文件夹统计 -->
-      <div class="flex flex-wrap gap-2 mb-6">
-        {Object.entries(categoryCounts).slice(0, 8).map(([name, count]) => (
-          <span class="text-xs bg-slate-800/50 px-2 py-1 rounded-full">{name}: {count}</span>
-        ))}
-        {Object.keys(categoryCounts).length > 8 && (
-          <span class="text-xs bg-slate-800/50 px-2 py-1 rounded-full">
-            +{Object.keys(categoryCounts).length - 8} 个分类
-          </span>
-        )}
-      </div>
-
-      <!-- 文件夹列表容器 -->
-      <div id="folderContainer" class="space-y-3">
-        <div class="text-center py-8 text-slate-400">加载中...</div>
-      </div>
-      
-      <!-- 加载更多按钮 -->
-      <div id="loadMoreBtn" class="text-center mt-8 hidden">
-        <button onclick="loadMore()" class="px-6 py-2 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/50 rounded-lg text-cyan-400 transition-all">
-          加载更多资源
-        </button>
-      </div>
-      
-      <div class="mt-10 text-center text-xs text-slate-600 border-t border-slate-800/50 pt-6">
-        <p>© MaiMaiNav Folder · {categoriesCount} 个分类 · {totalCount} 个精选链接 数据仅供学习参考
-          本站所提供的网址和资源均来源于互联网公开渠道，所有链接均指向第三方网盘或网站，
-          本站不储存、复制、传播任何文件，其网盘资源文件的完整性需要您自行判断。如有侵犯您的权益，
-          请发送相关证明文件至邮箱 maimai977977@gmail.com 及时与我们联系进行屏蔽删除处理！
-          谢谢！净网声明 - 版权说明 - 免责声明</p>
-      </div>
-    </div>
-  </div>
-</FolderLayout>
-
-<script define:vars={{ safeData: JSON.stringify(safeData), BATCH_SIZE }}>
-  // 解析传入的数据
-  let fullData = [];
-  try {
-    fullData = JSON.parse(safeData) || [];
-  } catch (e) {
-    console.error('数据解析失败:', e);
-  }
-  
-  console.log('总数据量:', fullData.length);
-  
-  let currentIndex = 0;
-  let isLoading = false;
-  let allDataLoaded = false;
-  
-  const batchSize = BATCH_SIZE || 100;
-  
-  function groupByCategory(data) {
-    const grouped = {};
-    for (const item of data) {
-      const cat = item.category || '未分类';
-      if (!grouped[cat]) grouped[cat] = [];
-      grouped[cat].push(item);
-    }
-    return grouped;
-  }
-  
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    });
-  }
-  
-  function renderData(data) {
-    const grouped = groupByCategory(data);
-    const container = document.getElementById('folderContainer');
-    if (!container) return;
-    
-    if (Object.keys(grouped).length === 0) {
-      container.innerHTML = '<div class="text-center py-12 text-slate-400">暂无数据</div>';
-      return;
-    }
-    
-    let html = '';
-    for (const [folderName, items] of Object.entries(grouped)) {
-      let itemsHtml = '';
-      for (const item of items) {
-        let domain = '';
-        try {
-          domain = item.url ? new URL(item.url).hostname : '';
-        } catch(e) {}
-        const faviconUrl = item.image || `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
-        
-        itemsHtml += `
-          <a href="${item.url || '#'}" target="_blank" rel="noopener noreferrer" 
-             class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800/50 transition-all group/link">
-            <div class="w-6 h-6 rounded bg-slate-800 flex items-center justify-center overflow-hidden">
-              <img src="${faviconUrl}" alt="${escapeHtml(item.title)}" class="w-4 h-4" onerror="this.style.display='none'"/>
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2">
-                <span class="text-sm font-medium text-slate-200 group-hover/link:text-cyan-400 truncate">${escapeHtml(item.title)}</span>
-                <span class="w-1.5 h-1.5 rounded-full ${item.status === 'online' ? 'bg-emerald-500' : 'bg-red-500'}"></span>
+      <div id="folderList" class="space-y-2">
+        {folders.slice(0, INITIAL_SHOW).map(folder => (
+          <div class="folder-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <button onclick="toggleFolder(this)" class="w-full flex items-center gap-3 p-3 hover:bg-blue-50 transition-all group">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-sm">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2z" /></svg>
               </div>
-              <p class="text-xs text-slate-500 truncate">${escapeHtml(item.description || '点击访问')}</p>
-            </div>
-            <svg class="w-4 h-4 text-slate-500 group-hover/link:text-cyan-400 group-hover/link:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-          </a>
-        `;
-      }
-      
-      html += `
-        <div class="folder-group">
-          <div class="folder-header">
-            <button onclick="toggleFolder(this)" class="w-full flex items-center gap-3 p-3 rounded-xl bg-slate-900/60 backdrop-blur-sm border border-slate-700/50 hover:border-cyan-500/50 transition-all">
-              <div class="w-6 h-6 flex items-center justify-center text-cyan-400 transition-transform folder-icon" style="transform: rotate(0deg)">
+              <div class="flex-1 text-left min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-semibold text-gray-800 truncate">{folder.name}</span>
+                  <span class="text-xs text-gray-500 flex-shrink-0">({folder.count})</span>
+                </div>
+              </div>
+              <div class="folder-icon transition-transform duration-300 text-gray-400">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
               </div>
-              <div class="flex-1 text-left">
-                <span class="text-base font-medium text-slate-100">${escapeHtml(folderName)}</span>
-                <span class="ml-2 text-xs text-slate-500">(${items.length})</span>
-              </div>
-              <div class="text-xs font-mono text-cyan-400/70"><span class="status-text">展开</span></div>
             </button>
-            <div class="folder-content mt-2 ml-8 pl-4 space-y-2 hidden">${itemsHtml}</div>
+            <div class="folder-content hidden">
+              <div class="px-3 pb-3 ml-11 border-l-2 border-gray-200">
+                {folder.items.map(item => (
+                  <a href={item.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 transition-all group/link">
+                    <div class="w-6 h-6 rounded bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                      <img src={item.image || `https://www.google.com/s2/favicons?domain=${new URL(item.url).hostname}&sz=32`} class="w-4 h-4" onerror="this.style.display='none'" />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2">
+                        <span class="text-xs font-medium text-gray-700 group-hover/link:text-blue-600 truncate">{item.title}</span>
+                        <span class={`w-1 h-1 rounded-full flex-shrink-0 ${item.status === 'online' ? 'bg-emerald-500' : 'bg-red-500'}`}></span>
+                      </div>
+                    </div>
+                    <svg class="w-3 h-3 text-gray-400 group-hover/link:text-blue-500 group-hover/link:translate-x-0.5 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
+        ))}
+      </div>
+
+      {remaining.length > 0 && (
+        <div class="text-center mt-6">
+          <button id="loadMoreBtn" class="px-6 py-2 bg-white border border-gray-300 hover:border-blue-400 hover:text-blue-600 rounded-lg text-sm text-gray-600 transition-all shadow-sm hover:shadow">
+            加载更多分类
+          </button>
         </div>
-      `;
-    }
-    
-    container.innerHTML = html;
-  }
-  
+      )}
+
+      <footer class="mt-8 pt-4 border-t border-gray-200 text-center text-xs text-gray-500">
+        © MaiMaiNav 文档导航 · {folders.length} 个分类 · {total} 个资源数据仅供学习参考
+          <br/>本站不储存、复制、传播任何文件 · 如有侵权请联系 <a href="mailto:maimai977977@gmail.com" class="text-blue-500 hover:text-blue-400 transition-colors">maimai977977@gmail.com</a>
+      </footer>
+    </div>
+  </div>
+
+<script define:vars={{ remaining: JSON.stringify(remaining) }}>
+  const data = JSON.parse(remaining);
+  let rendered = 0;
+  const list = document.getElementById('folderList');
+  const btn = document.getElementById('loadMoreBtn');
+
   window.toggleFolder = function(btn) {
-    const header = btn.closest('.folder-header');
-    const content = header.querySelector('.folder-content');
-    const icon = header.querySelector('.folder-icon');
-    const statusText = header.querySelector('.status-text');
+    const card = btn.closest('.folder-card');
+    const content = card.querySelector('.folder-content');
+    const icon = card.querySelector('.folder-icon');
     const isHidden = content.classList.contains('hidden');
-    
     if (isHidden) {
       content.classList.remove('hidden');
-      if (icon) icon.style.transform = 'rotate(90deg)';
-      if (statusText) statusText.textContent = '收起';
+      icon.style.transform = 'rotate(90deg)';
     } else {
       content.classList.add('hidden');
-      if (icon) icon.style.transform = 'rotate(0deg)';
-      if (statusText) statusText.textContent = '展开';
+      icon.style.transform = 'rotate(0deg)';
     }
   };
-  
-  window.loadMore = function() {
-    if (isLoading || allDataLoaded) return;
-    isLoading = true;
-    
-    const loadingEl = document.getElementById('loadingIndicator');
-    if (loadingEl) loadingEl.classList.remove('hidden');
-    
-    setTimeout(() => {
-      const newEnd = Math.min(currentIndex + batchSize, fullData.length);
-      const newData = fullData.slice(0, newEnd);
-      renderData(newData);
-      currentIndex = newEnd;
-      
-      if (currentIndex >= fullData.length) {
-        allDataLoaded = true;
-        const btn = document.getElementById('loadMoreBtn');
-        if (btn) btn.classList.add('hidden');
+
+  if (btn) {
+    btn.addEventListener('click', function() {
+      const end = Math.min(rendered + 4, data.length);
+      for (let i = rendered; i < end; i++) {
+        const folder = data[i];
+        let itemsHtml = '';
+        folder.items.forEach(item => {
+          const fav = item.image || ('https://www.google.com/s2/favicons?domain=' + new URL(item.url).hostname + '&sz=32');
+          const dot = item.status === 'online' ? 'bg-emerald-500' : 'bg-red-500';
+          itemsHtml += '<a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 transition-all">' +
+            '<div class="w-6 h-6 rounded bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">' +
+              '<img src="' + fav + '" class="w-4 h-4" onerror="this.style.display=\'none\'" />' +
+            '</div>' +
+            '<div class="flex-1 min-w-0">' +
+              '<div class="flex items-center gap-2">' +
+                '<span class="text-xs font-medium text-gray-700 truncate">' + item.title + '</span>' +
+                '<span class="w-1 h-1 rounded-full flex-shrink-0 ' + dot + '"></span>' +
+              '</div>' +
+            '</div>' +
+            '<svg class="w-3 h-3 text-gray-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>' +
+          '</a>';
+        });
+        const div = document.createElement('div');
+        div.className = 'folder-card bg-white rounded-xl border border-gray-200 overflow-hidden';
+        div.innerHTML = '<button onclick="toggleFolder(this)" class="w-full flex items-center gap-3 p-3 hover:bg-blue-50 transition-all group">' +
+          '<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-sm">' +
+            '<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2z" /></svg>' +
+          '</div>' +
+          '<div class="flex-1 text-left min-w-0">' +
+            '<div class="flex items-center gap-2">' +
+              '<span class="text-sm font-semibold text-gray-800 truncate">' + folder.name + '</span>' +
+              '<span class="text-xs text-gray-500 flex-shrink-0">(' + folder.count + ')</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="folder-icon transition-transform duration-300 text-gray-400">' +
+            '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>' +
+          '</div>' +
+        '</button>' +
+        '<div class="folder-content hidden">' +
+          '<div class="px-3 pb-3 ml-11 border-l-2 border-gray-200">' +
+            itemsHtml +
+          '</div>' +
+        '</div>';
+        list.appendChild(div);
       }
-      
-      if (loadingEl) loadingEl.classList.add('hidden');
-      isLoading = false;
-    }, 100);
-  };
-  
-  // 初始渲染
-  if (fullData.length > 0) {
-    currentIndex = Math.min(batchSize, fullData.length);
-    renderData(fullData.slice(0, currentIndex));
-    
-    if (fullData.length > batchSize) {
-      const btn = document.getElementById('loadMoreBtn');
-      if (btn) btn.classList.remove('hidden');
-    }
-  } else {
-    document.getElementById('folderContainer').innerHTML = '<div class="text-center py-12 text-slate-400">暂无数据</div>';
+      rendered = end;
+      if (rendered >= data.length) btn.style.display = 'none';
+    });
   }
+
+  document.getElementById('searchInput')?.addEventListener('input', function() {
+    const term = this.value.toLowerCase().trim();
+    const cards = list.querySelectorAll('.folder-card');
+    cards.forEach(card => {
+      const links = card.querySelectorAll('.folder-content a');
+      let hasMatch = false;
+      links.forEach(link => {
+        const title = link.querySelector('span')?.textContent?.toLowerCase() || '';
+        const show = !term || title.includes(term);
+        link.style.display = show ? '' : 'none';
+        if (show) hasMatch = true;
+      });
+      card.style.display = (hasMatch || !term) ? '' : 'none';
+    });
+  });
 </script>
 
 <style is:global>
   .folder-content.hidden { display: none; }
 </style>
+</FolderLayout>
